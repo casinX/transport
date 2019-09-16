@@ -1,0 +1,74 @@
++ Based on axios
+
++ import Transport from 'transport'
+
+
+class UserGet extends Transport {
+	+ url = '/api/user.get'
+
+	+ method = 'GET' | 'POST' | ...
+
+	+ memoTimeout = null // one of [null, Infinity, <number>]
+
+	+ serialize = (data) => { 			// default is data => data
+		return {
+			'id': data.id
+		}
+	}
+
+	+ parse = (data) => {				// default is data => data
+		return {
+			id: data['id'],
+			name: data['name'],
+			lastName: data['last_name'],
+		}
+	}
+
+	+ onUploadProgress = () => {
+
+	}
+
+	+ onDownloadProgress = () => {
+
+	}
+
+	+ config = () => {
+
+		// return full axios config, except: 'url', 'method', 'params', 'data', 'onUploadProgress', 'onDownloadProgress', 'cancelToken'
+		return {
+
+		}
+	}
+}
+
+
+const userGet = new UserGet()
+
+
+set pending
+
+const [response, error] = await userGet.call({ id: 215 })
+
++ // userGet.isRunning - status
+// userGet.cancel() - cancel request
++ // response or error is null
+
+if(response){
+	// it's ok
+}
+
+if(error){
+	// handle error
+}
+
+set not pending
+
+// if not error and not response - request was canceled
+
+
+
+
+
+
+
+
